@@ -1,0 +1,56 @@
+/*Define some variables.*/
+/*Name must begin with the double dash!*/
+:root{
+    --primary: #396dff;
+    --grey: #f7f7f7;
+    --white: #fff;
+    
+    --xs: 4px;
+    --s: 8px;
+    --m: 16px;
+    --l: 24px;
+}
+
+/*Center the text.*/
+.u-textCenter{
+    text-align: center;
+}
+
+/*Font family.*/
+html, body{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+/*Navigation title style.*/
+.navTitle{
+    color: var(--white);
+    font-size: 20px;
+    font-weight: normal;
+    margin: 0;
+}
+
+/*Navigation container style.*/
+.navContainer{
+    padding: var(--s) var(--m);
+    background-color: var(--primary);
+}
+
+/*Image style*/
+.image{
+    border-radius: 50%;
+    align-items: center;
+}
+
+
+/*Flex style*/
+.flex{
+    display: flex;
+    flex-direction: row;
+}
+
+/*Flex item style.*/
+.item{
+    padding: 16px;
+    margin: 8px;
+    flex-grow: 1;
+}

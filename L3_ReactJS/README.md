@@ -3,12 +3,17 @@
 
 These 'fake HTML tags' are called COMPONENTS. React Apps are "components of components", which can use a tree structure to display. React is a framework that lets you divide up your website into reusable components. Each component is kind of like a 'custom HTML tag' that you define.
 
-`Props`: Inputs passed from a parent to a child component. Props are immutable(不可变的). In the html beside, name and text are all props(the inputs).
+`Props`: Inputs passed from a parent to a child component. Props are immutable(不可变的). In the html beside, name and text are all props(the inputs). Here, `props = {name:"Akshaj", text:"Welcome to web lab!"}`
 ```html
 <Post name="Akshaj" text="Welcome to web lab!" />
 ```
 
-`State`: Private information maintained by a component.
+`State`: Private information(updatable pieces of information) maintained by a component.
+```javascript
+const [status, setStatus] = useState("busy");
+const [isOnline, setIsOnline] = useState(false);
+const [isLiked, setIsLiked] = useState(0);
+```
 
 Now we have our reuasble comment component:
 - We pass props in from parent to child.

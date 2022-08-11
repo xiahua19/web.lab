@@ -178,12 +178,16 @@ let copyObj = { ...obj };
 # Classes
 If you want to multiple entities that are guaranteeed to have shared behavior, use classes! Every class has a constructor which tells it how to create a specific instance of that entity.
 
-Classes may also contain methods(functions) which can access and manipulate instance properties.
+Classes may also contain methods(functions) which can access and manipulate instance properties. The same methods exist in every instance of the class.
 ```javascript
 class Rectangle {
     constructor(width, height) {
         this.width = width;
         this.height = height;
+    }
+
+    getArea = () => {
+        return this.width * this.height;
     }
 }
 

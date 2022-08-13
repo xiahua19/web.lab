@@ -153,3 +153,4 @@ export default Post;
 - We read in those props with `.` function.
 - We declare state variavles with `const [something, setSomething] = useState(initialValue)`.
 - React uses `className` instead of class for css style.
+

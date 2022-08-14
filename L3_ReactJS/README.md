@@ -3,6 +3,7 @@
 
 These 'fake HTML tags' are called COMPONENTS. React Apps are "components of components", which can use a tree structure to display. React is a framework that lets you divide up your website into reusable components. Each component is kind of like a 'custom HTML tag' that you define.
 
+## Props & States
 `Props`: Inputs passed from a parent to a child component. Props are immutable(不可变的). In the html beside, name and text are all props(the inputs). Here, `props = {name:"Akshaj", text:"Welcome to web lab!"}`
 ```html
 <Post name="Akshaj" text="Welcome to web lab!" />
@@ -19,6 +20,26 @@ Now we have our reuasble comment component:
 - We pass props in from parent to child.
 - Allows out skeleton to render comments with content.
 - State keeps track of private information that can be changed and influence how your app renders.
+
+## Callback Functions
+We can't directly edit a component's state from another component! One possible route is to pass the setCatHappiness function to child and then call it from there.
+```javascript
+// ParentComponent
+const changeCatHappiness = () => {
+    setCatHappiness(catHappiness + 1);
+}
+
+return (
+    <ChildComponent updateFunction={changeCatHappiness} />
+);
+
+// ChildComponent
+props.updateFunction();
+```
+But note that this is a WORKAROUND. You shouldn't be doing this all the time - a well-designed component tree should try to avoid these issues, since this kind of stuff is a bit complex, unstable parent state.
+
+## Make states stay, make props pass
+PROPS PASS DOWN is very importment. Remember that props pass down. On the component tree, if you structure yout post above your feed, this will make prop passing very difficult. So information should exist as a state in the highest level of the tree where it's relevant, and be passed to every other part of the site via props.
 
 # Writing ReactJS Components
 Take facebook for example, the component tree likes this:
@@ -153,4 +174,3 @@ export default Post;
 - We read in those props with `.` function.
 - We declare state variavles with `const [something, setSomething] = useState(initialValue)`.
 - React uses `className` instead of class for css style.
-

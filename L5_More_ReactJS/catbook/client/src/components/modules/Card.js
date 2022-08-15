@@ -3,7 +3,7 @@ import { get } from "../../utilities";
 import SingleStory from "./SingleStory.js";
 import SingleComment from "./SingleComment.js";
 import { NewComment } from "./NewPostInput";
-// TODO (step9): import CommentsBlock
+import CommentsBlock from "./CommentsBlock";
 
 import "./Card.css";
 
@@ -23,31 +23,24 @@ const Card = (props) => {
       setComments(commentItems);
     });
   }, []);
-
-  let commentsList = null;
-    const hasComments = comments.length !== 0;
-    if (hasComments) {
-      commentsList = comments.map((commentObj) => (
-        <SingleComment
-          _id={commentObj._id}
-          creator_name={commentObj.creator_name}
-          content={commentObj.content}
-        />
-      ));
-    } else {
-      commentsList = <div>No comments!</div>;
-    }
+  
+  // this gets called when the user pushes "Submit", so their
+  // post gets added to the screen right away
+  const addNewComment = (commentObj) => {
+    setComments(comments.concat([commentObj]));
+  };
 
   return (
+    <>
     <div className="Card-container">
         <SingleStory
           _id={props._id}
           creator_name={props.creator_name}
           content={props.content}
         />
-        {commentsList}
-        <NewComment storyId={props._id} />
+        <CommentsBlock storyId={props._id} comments={comments} addNewComment={addNewComment} />
       </div>
+    </>
   )
   // TODO (step9): use CommentsBlock
 };

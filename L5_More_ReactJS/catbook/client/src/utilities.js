@@ -8,8 +8,6 @@
  * e.g. get('/api/foo', { bar: 0 }).then(res => console.log(res))
  */
 
-const BASE_URL = "http://catbook-workshop2.herokuapp.com";
-
 // ex: formatParams({ some_key: "some_value", a: "b"}) => "some_key=some_value&a=b"
 function formatParams(params) {
   // iterate of all the keys of params as an array,
@@ -41,7 +39,7 @@ function convertToJSON(res) {
 // Returns a Promise to a JSON Object.
 export function get(endpoint, params = {}) {
   const fullPath = endpoint + "?" + formatParams(params);
-  return fetch(BASE_URL + fullPath)
+  return fetch(fullPath)
     .then(convertToJSON)
     .catch((error) => {
       // give a useful error message
@@ -52,8 +50,8 @@ export function get(endpoint, params = {}) {
 // Helper code to make a post request. Default parameter of empty JSON Object for params.
 // Returns a Promise to a JSON Object.
 export function post(endpoint, params = {}) {
-  return fetch(BASE_URL + endpoint, {
-    method: "POST",
+  return fetch(endpoint, {
+    method: "post",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(params),
   })

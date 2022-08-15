@@ -3,25 +3,28 @@
 
 These 'fake HTML tags' are called COMPONENTS. React Apps are "components of components", which can use a tree structure to display. React is a framework that lets you divide up your website into reusable components. Each component is kind of like a 'custom HTML tag' that you define.
 
-## Props & States
+# Props & States
+Now we have our reuasble comment component:
+- We pass props in from parent to child.
+- Allows out skeleton to render comments with content.
+- State keeps track of private information that can be changed and influence how your app renders.
+
+## Props
 `Props`: Inputs passed from a parent to a child component. Props are immutable(不可变的). In the html beside, name and text are all props(the inputs). Here, `props = {name:"Akshaj", text:"Welcome to web lab!"}`
 ```html
 <Post name="Akshaj" text="Welcome to web lab!" />
 ```
 
+## States
 `State`: Private information(updatable pieces of information) maintained by a component.
 ```javascript
 const [status, setStatus] = useState("busy");
 const [isOnline, setIsOnline] = useState(false);
 const [isLiked, setIsLiked] = useState(0);
 ```
+Setting state is an asynchronous(异步) function! Once setState is called, we do not expect it to execute or finish right away. 
 
-Now we have our reuasble comment component:
-- We pass props in from parent to child.
-- Allows out skeleton to render comments with content.
-- State keeps track of private information that can be changed and influence how your app renders.
-
-## Callback Functions
+### Callback Functions
 We can't directly edit a component's state from another component! One possible route is to pass the setCatHappiness function to child and then call it from there.
 ```javascript
 // ParentComponent
@@ -36,7 +39,10 @@ return (
 // ChildComponent
 props.updateFunction();
 ```
-But note that this is a WORKAROUND. You shouldn't be doing this all the time - a well-designed component tree should try to avoid these issues, since this kind of stuff is a bit complex, unstable parent state.
+But note that this is a WORKAROUND(解决办法). You shouldn't be doing this all the time - a well-designed component tree should try to avoid these issues, since this kind of stuff is a bit complex, unstable parent state.
+
+### useEffect hook
+What if we want to do something immediately after state is changed? We need a new React feature for this: the useEffect hook!
 
 ## Make states stay, make props pass
 PROPS PASS DOWN is very importment. Remember that props pass down. On the component tree, if you structure yout post above your feed, this will make prop passing very difficult. So information should exist as a state in the highest level of the tree where it's relevant, and be passed to every other part of the site via props.

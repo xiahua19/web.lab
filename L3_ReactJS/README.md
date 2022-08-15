@@ -44,6 +44,35 @@ But note that this is a WORKAROUND(解决办法). You shouldn't be doing this al
 ### useEffect hook
 What if we want to do something immediately after state is changed? We need a new React feature for this: the useEffect hook!
 
+<div align="center">
+<img src="https://github.com/xiahua19/ImagesURL/blob/main/blogImgs/lifecycle.png?raw=true" width="50%" />
+</div>
+
+useEffect hook runs after specific variables change:
+- Can think of as response to state change.
+- Commonly used to load data into state.
+- Call an API/perform some computation/etc. as specific times.
+
+syntax: `useEffect(function, optional dependency array)`, runs function every time a variable in dependency array changes. 
+
+```javascript
+// Add "me" to persons array.
+testingStuff = () => {
+    setPerson([...persons, "me"]);
+}
+
+// Call log function whenever the persons array changes.
+useEffect(() => {
+    console.log(persons);
+}, [persons])
+```
+Dependency array examples:
+- useEffect(function, [var1, var2]) runs function every time var1 or var2 changes.
+- useEffect(function, []) runs function once, immediately after initialization.
+- useEffect(function) runs every time any state variable changes.
+
+
+
 ## Make states stay, make props pass
 PROPS PASS DOWN is very importment. Remember that props pass down. On the component tree, if you structure yout post above your feed, this will make prop passing very difficult. So information should exist as a state in the highest level of the tree where it's relevant, and be passed to every other part of the site via props.
 

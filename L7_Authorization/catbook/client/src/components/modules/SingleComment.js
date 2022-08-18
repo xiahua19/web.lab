@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "@reach/router";
 
 /**
  * Component to render a single comment
@@ -11,7 +12,9 @@ import React from "react";
 const SingleComment = (props) => {
   return (
     <div className="Card-commentBody">
-      <span className="u-bold">{props.creator_name}</span>
+      <Link to={`/profile/${props.creator_id}`} className="u-link u-bold">
+        {props.creator_name}
+      </Link>
       <span>{" | " + props.content}</span>
     </div>
   );

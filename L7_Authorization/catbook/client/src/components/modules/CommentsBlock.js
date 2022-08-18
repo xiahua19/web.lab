@@ -6,6 +6,7 @@ import { NewComment } from "./NewPostInput.js";
  * @typedef ContentObject
  * @property {string} _id of story/comment
  * @property {string} creator_name
+ * @property {string} creator_id
  * @property {string} content of the story/comment
  */
 
@@ -25,10 +26,13 @@ const CommentsBlock = (props) => {
             key={`SingleComment_${comment._id}`}
             _id={comment._id}
             creator_name={comment.creator_name}
+            creator_id={comment.creator_id}
             content={comment.content}
           />
         ))}
-        <NewComment storyId={props.story._id} addNewComment={props.addNewComment} />
+        {props.userId && (
+          <NewComment storyId={props.story._id} addNewComment={props.addNewComment} />
+        )}
       </div>
     </div>
   );

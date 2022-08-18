@@ -4,7 +4,7 @@ import { NewStory } from "../modules/NewPostInput.js";
 
 import { get } from "../../utilities";
 
-const Feed = () => {
+const Feed = (props) => {
   const [stories, setStories] = useState([]);
 
   // called when the "Feed" component "mounts", i.e.
@@ -13,7 +13,7 @@ const Feed = () => {
     document.title = "News Feed";
     get("/api/stories").then((storyObjs) => {
       let reversedStoryObjs = storyObjs.reverse();
-      setStories(reversedStoryObjs);
+	  setStories(reversedStoryObjs)
     });
   }, []);
 
@@ -31,6 +31,8 @@ const Feed = () => {
         key={`Card_${storyObj._id}`}
         _id={storyObj._id}
         creator_name={storyObj.creator_name}
+        creator_id={storyObj.creator_id}
+        userId={props.userId}
         content={storyObj.content}
       />
     ));
@@ -39,7 +41,7 @@ const Feed = () => {
   }
   return (
     <>
-      <NewStory addNewStory={addNewStory} />
+      {props.userId && <NewStory addNewStory={addNewStory} />}
       {storiesList}
     </>
   );

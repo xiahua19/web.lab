@@ -10,17 +10,7 @@ const GOOGLE_CLIENT_ID = "121479668229-t5j82jrbi9oejh7c8avada226s75bopn.apps.goo
 /**
  * The navigation bar at the top of all pages. Takes no props.
  */
-const NavBar = () => {
-  const handleLogin = (res) => {
-    // 'res' contains the response from Google's authentication servers
-    console.log(res);
-
-    // TODO: Set a variable 'loggedIn' to react state
-  };
-
-  // TODO: Add a function for handleLogout here
-
-  // TODO: Add a logout button
+const NavBar = (props) => {
   return (
     <nav className="NavBar-container">
       <div className="NavBar-title u-inlineBlock">Catbook</div>
@@ -28,16 +18,28 @@ const NavBar = () => {
         <Link to="/" className="NavBar-link">
           Home
         </Link>
-        <Link to="/profile/" className="NavBar-link">
-          Profile
-        </Link>
-        <GoogleLogin
-          clientId={GOOGLE_CLIENT_ID}
-          buttonText="Login"
-          onSuccess={handleLogin}
-          onFailure={(err) => console.log(err)}
-          className="NavBar-link NavBar-login"
-        />
+        {props.userId && (
+          <Link to={`/profile/${props.userId}`} className="NavBar-link">
+            Profile
+          </Link>
+        )}
+        {props.userId ? (
+          <GoogleLogout
+            clientId={GOOGLE_CLIENT_ID}
+            buttonText="Logout"
+            onLogoutSuccess={props.handleLogout}
+            onFailure={(err) => console.log(err)}
+            className="NavBar-link NavBar-login"
+          />
+        ) : (
+          <GoogleLogin
+            clientId={GOOGLE_CLIENT_ID}
+            buttonText="Login"
+            onSuccess={props.handleLogin}
+            onFailure={(err) => console.log(err)}
+            className="NavBar-link NavBar-login"
+          />
+        )}
       </div>
     </nav>
   );

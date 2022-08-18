@@ -20,15 +20,17 @@ validator.checkSetup();
 
 //import libraries needed for the webserver to work!
 const express = require("express"); // backend framework for our node server.
+const session = require("express-session"); // library that stores info about each connected user.
 const mongoose = require("mongoose"); // library to connect to MongoDB
 const path = require("path"); // provide utilities for working with file and directory paths
 
 const api = require("./api");
+const auth = require("./auth");
 
 // Server configuration below
 // TODO change connection URL after setting up your own database
 const mongoConnectionURL =
-  "mongodb+srv://weblab:jAT4po55IAgYWQgR@catbook-ylndp.mongodb.net/test?retryWrites=true&w=majority";
+  "mongodb+srv://xiahua:zjxpku123@cluster0.gnckqjk.mongodb.net/?retryWrites=true&w=majority";
 // TODO change database name to the name you chose
 const databaseName = "catbook";
 
@@ -48,6 +50,18 @@ app.use(validator.checkRoutes);
 
 // set up bodyParser, which allows us to process POST requests
 app.use(express.json());
+
+// set up a session, which will persist login data across requests
+app.use(
+  session({
+    secret: "session-secret",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+// this checks if the user is logged in, and populates "req.user"
+app.use(auth.populateCurrentUser);
 
 // connect API routes to the file ./api.js
 app.use("/api", api);
